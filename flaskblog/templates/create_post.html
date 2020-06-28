@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }} <!-- Main function of this line is to secure the form against attacks-->
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4"> {{ legend }} </legend>
+           
+            <div class="form-group">
+                {{ form.title.label(class="form-control-label") }}  <!-- Print label -->
+                {% if form.title.errors %}  <!-- If invalid data is supplied to the form-->
+                    {{ form.title(class="form-control form-control-lg is-invalid") }}   <!--Show a bootstrap theemed invalid form-->
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %} <!--loop through the errors generated-->
+                            <span>{{ error }}</span>    <!-- Print the errors-->
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.title(class="form-control form-control-lg") }}  <!--Show this if there is no error-->
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.content.label(class="form-control-label") }}
+                {% if form.content.errors %}
+                    {{ form.content(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.content.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.content(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }} <!--Submit button-->
+        </div>
+    </form>
+</div>
+{% endblock content %}
